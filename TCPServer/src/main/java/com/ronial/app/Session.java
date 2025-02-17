@@ -55,17 +55,6 @@ public class Session implements Runnable {
         this.dos.writeUTF(message);
         this.dos.flush();
     }
-    public void systemBroadcast(String message) {
-        Server server = ContextProvider.get(Server.class);
-        server.getSessions().forEach(client -> {
-            try {
-                String response = "System: " + message;
-                client.emit(ActionType.SEND_MESSAGE.name(), response);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }
     public DataInputStream getDis() {
         return dis;
     }
